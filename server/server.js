@@ -15,10 +15,17 @@ const io = new Server(server, {
   },
 });
 
+const { instrument } = require("@socket.io/admin-ui");
+instrument(io, {
+  auth: false,
+  mode: "development",
+});
+
 require("./sockets/socket")(io);
 
 const PORT = 8000;
 
 server.listen(PORT, () => {
   console.log(`Server running on ${PORT}`);
+  console.log(`Socket.IO Admin UI: http://localhost:${PORT}/admin`);
 });
